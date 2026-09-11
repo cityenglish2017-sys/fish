@@ -1,0 +1,1191 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+:root {
+  --sky: #dff5ff;
+  --river: #5bc4eb;
+  --river-dark: #2c9fd0;
+  --grass: #76bd52;
+  --cream: #fff9e9;
+  --text: #153650;
+}
+
+html,
+body {
+  margin: 0;
+
+  width: 100%;
+  min-height: 100%;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
+
+  background:
+    linear-gradient(
+      #dff5ff,
+      #fdf8dc
+    );
+
+  color: var(--text);
+}
+
+body {
+  min-height: 100vh;
+
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+
+/* ==================================== */
+/* 전체 */
+/* ==================================== */
+
+.game {
+  width:
+    min(1400px,100%);
+
+  margin: 0 auto;
+
+  padding:
+    8px
+    max(10px,env(safe-area-inset-right))
+    max(8px,env(safe-area-inset-bottom))
+    max(10px,env(safe-area-inset-left));
+}
+
+
+/* ==================================== */
+/* 상단 */
+/* ==================================== */
+
+.topbar {
+  height: 55px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.tiny-title {
+  font-size: 10px;
+
+  letter-spacing: .15em;
+
+  font-weight: 900;
+
+  color: #2c87ad;
+}
+
+h1 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      25px,
+      3vw,
+      36px
+    );
+
+  line-height: 1;
+}
+
+.status-area {
+  display: flex;
+
+  gap: 7px;
+}
+
+.status-box {
+  min-width: 78px;
+
+  padding: 6px 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  border-radius: 15px;
+
+  background: white;
+
+  box-shadow:
+    0 5px 16px
+    rgba(25,93,129,.13);
+
+  font-size: 21px;
+}
+
+.status-box strong {
+  font-size: 19px;
+}
+
+
+/* ==================================== */
+/* 강 */
+/* ==================================== */
+
+.river {
+  position: relative;
+
+  height: 355px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #77d3f1,
+      #41b4df
+    );
+
+  border:
+    5px solid
+    rgba(255,255,255,.8);
+
+  box-shadow:
+    0 10px 30px
+    rgba(26,108,151,.22);
+
+  touch-action: none;
+
+  cursor: crosshair;
+}
+
+
+/* ==================================== */
+/* 강둑 */
+/* ==================================== */
+
+.river-bank {
+  position: absolute;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 42px;
+
+  z-index: 6;
+
+  background:
+    linear-gradient(
+      #92d86a,
+      #68af47
+    );
+}
+
+.bank-top {
+  top: 0;
+
+  border-bottom:
+    6px solid
+    #c9a36d;
+}
+
+.bank-bottom {
+  bottom: 0;
+
+  border-top:
+    6px solid
+    #c9a36d;
+}
+
+.grass,
+.flower,
+.rock,
+.frog {
+  position: absolute;
+
+  font-size: 27px;
+}
+
+.grass1 {
+  left: 5%;
+  top: 3px;
+}
+
+.grass2 {
+  left: 26%;
+  top: 4px;
+}
+
+.grass3 {
+  right: 18%;
+  top: 4px;
+}
+
+.flower1 {
+  right: 8%;
+  top: 4px;
+}
+
+.flower2 {
+  left: 11%;
+  top: 3px;
+}
+
+.rock1 {
+  right: 29%;
+  top: 7px;
+
+  font-size: 22px;
+}
+
+.rock2 {
+  left: 42%;
+  top: 6px;
+
+  font-size: 22px;
+}
+
+.frog {
+  right: 5%;
+  top: 3px;
+}
+
+
+/* ==================================== */
+/* 물결 */
+/* ==================================== */
+
+.water-line {
+  position: absolute;
+
+  left: -10%;
+
+  width: 120%;
+  height: 4px;
+
+  opacity: .33;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 25px,
+      white 25px 63px,
+      transparent 63px 91px
+    );
+
+  animation:
+    waterMove 8s linear infinite;
+}
+
+.line1 {
+  top: 105px;
+}
+
+.line2 {
+  top: 188px;
+
+  animation-duration:
+    11s;
+}
+
+.line3 {
+  top: 267px;
+
+  animation-duration:
+    6s;
+}
+
+@keyframes waterMove {
+
+  from {
+    transform:
+      translateX(0);
+  }
+
+  to {
+    transform:
+      translateX(100px);
+  }
+
+}
+
+
+/* ==================================== */
+/* 물고기 */
+/* ==================================== */
+
+.fish-layer {
+  position: absolute;
+
+  inset:
+    45px 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+}
+
+.fish {
+  position: absolute;
+
+  width: 54px;
+  height: 41px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 34px;
+
+  transform-origin:
+    center;
+
+  filter:
+    drop-shadow(
+      0 3px 2px
+      rgba(20,77,105,.18)
+    );
+
+  will-change:
+    left, top;
+}
+
+.fish.large {
+  font-size: 42px;
+}
+
+.fish.small {
+  font-size: 28px;
+}
+
+
+/* 일반 */
+
+.fish.common {
+  filter:
+    drop-shadow(
+      0 2px 2px
+      rgba(0,0,0,.15)
+    );
+}
+
+
+/* 희귀 */
+
+.fish.rare {
+  filter:
+    drop-shadow(
+      0 0 5px
+      rgba(255,244,106,.8)
+    );
+}
+
+
+/* 전설 */
+
+.fish.legendary {
+  animation:
+    legendaryGlow
+    1s ease-in-out
+    infinite alternate;
+}
+
+@keyframes legendaryGlow {
+
+  from {
+    filter:
+      drop-shadow(
+        0 0 3px
+        white
+      );
+  }
+
+  to {
+    filter:
+      drop-shadow(
+        0 0 13px
+        gold
+      );
+  }
+
+}
+
+
+/* ==================================== */
+/* 그물 */
+/* ==================================== */
+
+.net-selection {
+  position: absolute;
+
+  z-index: 20;
+
+  border:
+    5px solid
+    rgba(255,255,255,.95);
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.12);
+
+  box-shadow:
+    0 0 20px
+    rgba(255,255,255,.4);
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.net-grid {
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      45deg,
+      transparent 45%,
+      rgba(255,255,255,.75) 46%,
+      rgba(255,255,255,.75) 53%,
+      transparent 54%
+    ),
+
+    linear-gradient(
+      -45deg,
+      transparent 45%,
+      rgba(255,255,255,.75) 46%,
+      rgba(255,255,255,.75) 53%,
+      transparent 54%
+    );
+
+  background-size:
+    24px 24px;
+}
+
+
+/* ==================================== */
+/* 강 안내 */
+/* ==================================== */
+
+.river-guide {
+  position: absolute;
+
+  left: 50%;
+
+  top: 51px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 10;
+
+  padding:
+    5px 14px;
+
+  border-radius: 99px;
+
+  background:
+    rgba(255,255,255,.82);
+
+  font-size: 20px;
+
+  box-shadow:
+    0 3px 12px
+    rgba(43,106,136,.13);
+
+  pointer-events: none;
+}
+
+
+/* ==================================== */
+/* 잡힘 효과 */
+/* ==================================== */
+
+.catch-effect {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index: 30;
+
+  font-size: 80px;
+
+  pointer-events: none;
+
+  animation:
+    catchPop .6s ease;
+}
+
+@keyframes catchPop {
+
+  0% {
+    transform:
+      translate(-50%,-50%)
+      scale(.2);
+
+    opacity: 0;
+  }
+
+  50% {
+    transform:
+      translate(-50%,-50%)
+      scale(1.3);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+
+    opacity: 0;
+  }
+
+}
+
+
+/* ==================================== */
+/* 빠른 패널 */
+/* ==================================== */
+
+.quick-panel {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 100px;
+
+  gap: 8px;
+
+  margin-top: 8px;
+}
+
+.quick-box {
+  min-height: 52px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  border-radius: 16px;
+
+  background: white;
+
+  font-size: 20px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 5px 14px
+    rgba(34,70,120,.09);
+}
+
+.quick-icon {
+  font-size: 26px;
+}
+
+.auction-main-button {
+  border: 0;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffcd54,
+      #ff9d3b
+    );
+
+  font-size: 31px;
+
+  box-shadow:
+    0 5px 14px
+    rgba(194,117,29,.22);
+}
+
+
+/* ==================================== */
+/* 창고 */
+/* ==================================== */
+
+.warehouse {
+  margin-top: 8px;
+
+  padding: 9px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      #c89059,
+      #91613d
+    );
+
+  border:
+    5px solid
+    #70482f;
+
+  box-shadow:
+    0 7px 19px
+    rgba(89,54,30,.18);
+}
+
+.warehouse-header {
+  height: 28px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding:
+    0 7px;
+
+  color: white;
+
+  font-size: 18px;
+}
+
+.warehouse-title {
+  letter-spacing:
+    .25em;
+}
+
+.warehouse-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap: 7px;
+}
+
+.fish-storage {
+  position: relative;
+
+  min-height: 105px;
+
+  padding: 7px 4px;
+
+  border: 0;
+
+  border-radius: 13px;
+
+  background:
+    #fff5d6;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  box-shadow:
+    inset 0 -5px 0
+    rgba(134,83,40,.08);
+
+  cursor: pointer;
+}
+
+.fish-storage.empty {
+  opacity: .45;
+}
+
+.storage-icon {
+  font-size: 31px;
+}
+
+.storage-stars {
+  min-height: 15px;
+
+  font-size: 9px;
+
+  letter-spacing: -2px;
+}
+
+.storage-count {
+  min-width: 35px;
+
+  padding: 2px 8px;
+
+  border-radius: 99px;
+
+  background: #e7c78f;
+
+  font-size: 14px;
+
+  font-weight: 950;
+}
+
+.storage-stack {
+  height: 18px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.storage-mini {
+  margin-left: -7px;
+
+  font-size: 16px;
+}
+
+.storage-mini:first-child {
+  margin-left: 0;
+}
+
+
+/* ==================================== */
+/* 경매창 */
+/* ==================================== */
+
+.auction-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 15px;
+
+  background:
+    rgba(16,32,47,.65);
+
+  backdrop-filter:
+    blur(6px);
+}
+
+.auction-room {
+  position: relative;
+
+  width:
+    min(620px,95vw);
+
+  padding: 20px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      #fff4ce,
+      #f8dd9b
+    );
+
+  border:
+    7px solid
+    #9e6235;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.28);
+}
+
+.close-btn {
+  position: absolute;
+
+  right: 10px;
+  top: 10px;
+
+  width: 40px;
+  height: 40px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,.75);
+
+  font-size: 20px;
+}
+
+.auction-title {
+  text-align: center;
+
+  font-size: 24px;
+
+  font-weight: 950;
+
+  letter-spacing: .06em;
+
+  color: #70402a;
+}
+
+.auction-stage {
+  margin:
+    10px auto;
+
+  width: 190px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  border-radius: 20px;
+
+  background:
+    white;
+
+  box-shadow:
+    0 5px 15px
+    rgba(94,55,28,.13);
+}
+
+.auction-fish {
+  font-size: 68px;
+}
+
+.auction-stars {
+  font-size: 16px;
+
+  min-height: 24px;
+}
+
+.auction-base-price {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 4px;
+
+  font-size: 21px;
+}
+
+
+/* 입찰자 */
+
+.bidders {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap: 8px;
+}
+
+.bidder {
+  padding: 10px;
+
+  border-radius: 17px;
+
+  background: white;
+
+  text-align: center;
+
+  transition:
+    transform .18s ease;
+}
+
+.bidder.leading {
+  transform:
+    translateY(-8px)
+    scale(1.05);
+
+  box-shadow:
+    0 7px 17px
+    rgba(237,163,46,.35);
+
+  border:
+    4px solid
+    gold;
+}
+
+.bidder-face {
+  font-size: 41px;
+}
+
+.bid-value {
+  margin-top: 2px;
+
+  padding: 5px;
+
+  border-radius: 99px;
+
+  background: #fff0b9;
+
+  font-weight: 950;
+}
+
+
+/* 결과 */
+
+.auction-result {
+  min-height: 46px;
+
+  margin-top: 10px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,.64);
+
+  font-size: 25px;
+
+  font-weight: 950;
+}
+
+.sell-btn {
+  width: 100%;
+
+  min-height: 55px;
+
+  margin-top: 8px;
+
+  border: 0;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      #e15340,
+      #b5342c
+    );
+
+  color: white;
+
+  font-size: 24px;
+
+  font-weight: 950;
+
+  box-shadow:
+    0 6px 0
+    #81241e;
+}
+
+
+/* ==================================== */
+/* 희귀 물고기 팝업 */
+/* ==================================== */
+
+.rare-popup {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 80;
+
+  display: grid;
+
+  place-items: center;
+
+  pointer-events: none;
+
+  background:
+    rgba(255,255,255,.15);
+}
+
+.rare-card {
+  padding: 25px 42px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ae,
+      #ffc95f
+    );
+
+  text-align: center;
+
+  border:
+    6px solid white;
+
+  box-shadow:
+    0 0 50px
+    rgba(255,223,75,.85);
+
+  animation:
+    rarePop .8s ease;
+}
+
+@keyframes rarePop {
+
+  0% {
+    transform:
+      scale(.2)
+      rotate(-8deg);
+
+    opacity: 0;
+  }
+
+  50% {
+    transform:
+      scale(1.25)
+      rotate(5deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      scale(1)
+      rotate(0);
+
+    opacity: 1;
+  }
+
+}
+
+.rare-popup-fish {
+  font-size: 80px;
+}
+
+.rare-popup-stars {
+  font-size: 20px;
+}
+
+.rare-popup-text {
+  margin-top: 7px;
+
+  font-size: 27px;
+
+  font-weight: 950;
+}
+
+
+/* ==================================== */
+/* 공통 */
+/* ==================================== */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* ==================================== */
+/* 아이패드 가로 */
+/* ==================================== */
+
+@media
+(max-height:850px)
+and
+(orientation:landscape) {
+
+  .game {
+    padding-top: 4px;
+  }
+
+  .topbar {
+    height: 42px;
+  }
+
+  .tiny-title {
+    display: none;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .status-box {
+    min-width: 66px;
+
+    padding:
+      3px 8px;
+
+    font-size: 17px;
+  }
+
+  .status-box strong {
+    font-size: 16px;
+  }
+
+  .river {
+    height: 300px;
+  }
+
+  .quick-panel {
+    margin-top: 5px;
+  }
+
+  .quick-box {
+    min-height: 43px;
+  }
+
+  .warehouse {
+    margin-top: 5px;
+
+    padding: 6px;
+  }
+
+  .fish-storage {
+    min-height: 82px;
+
+    padding: 4px;
+  }
+
+  .storage-icon {
+    font-size: 25px;
+  }
+
+  .storage-stack {
+    height: 14px;
+  }
+
+  .storage-mini {
+    font-size: 12px;
+  }
+
+}
+
+
+/* ==================================== */
+/* 작은 화면 */
+/* ==================================== */
+
+@media
+(max-width:800px) {
+
+  .warehouse-grid {
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+}

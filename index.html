@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0,
+    maximum-scale=1.0, user-scalable=no"
+  />
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="theme-color"
+    content="#79c7ef"
+  />
+
+  <title>WENDY RIVER FISHING</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+</head>
+
+<body>
+
+  <main class="game">
+
+    <!-- ============================= -->
+    <!-- 상단 -->
+    <!-- ============================= -->
+
+    <header class="topbar">
+
+      <div class="title-area">
+
+        <div class="tiny-title">
+          WENDY RIVER
+        </div>
+
+        <h1>
+          🎣 FISHING
+        </h1>
+
+      </div>
+
+
+      <div class="status-area">
+
+        <div class="status-box">
+          <span>🪙</span>
+          <strong id="coinCount">0</strong>
+        </div>
+
+        <div class="status-box">
+          <span>🧺</span>
+          <strong id="fishCount">0</strong>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ============================= -->
+    <!-- 강 -->
+    <!-- ============================= -->
+
+    <section
+      id="river"
+      class="river"
+    >
+
+      <!-- 강 주변 -->
+
+      <div class="river-bank bank-top">
+
+        <div class="grass grass1">🌿</div>
+
+        <div class="grass grass2">🌱</div>
+
+        <div class="flower flower1">🌼</div>
+
+        <div class="rock rock1">🪨</div>
+
+      </div>
+
+
+      <div class="river-bank bank-bottom">
+
+        <div class="grass grass3">🌿</div>
+
+        <div class="flower flower2">🌸</div>
+
+        <div class="rock rock2">🪨</div>
+
+        <div class="frog">🐸</div>
+
+      </div>
+
+
+      <!-- 물결 -->
+
+      <div class="water-line line1"></div>
+
+      <div class="water-line line2"></div>
+
+      <div class="water-line line3"></div>
+
+
+      <!-- 물고기가 JS로 생성됨 -->
+
+      <div
+        id="fishLayer"
+        class="fish-layer"
+      ></div>
+
+
+      <!-- 그물 드래그 영역 -->
+
+      <div
+        id="netSelection"
+        class="net-selection hidden"
+      >
+
+        <div class="net-grid"></div>
+
+      </div>
+
+
+      <!-- 잡힘 효과 -->
+
+      <div
+        id="catchEffect"
+        class="catch-effect hidden"
+      >
+        🎉
+      </div>
+
+
+      <!-- 안내 아이콘 -->
+
+      <div class="river-guide">
+        👆 ➜ 🕸️ ➜ 🐟
+      </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- 빠른 상태 -->
+    <!-- ============================= -->
+
+    <section class="quick-panel">
+
+      <div class="quick-box">
+
+        <span class="quick-icon">
+          🕸️
+        </span>
+
+        <span>
+          👆 ↔️
+        </span>
+
+      </div>
+
+
+      <div class="quick-box">
+
+        <span class="quick-icon">
+          🐟
+        </span>
+
+        <span id="lastCatch">
+          × 0
+        </span>
+
+      </div>
+
+
+      <button
+        id="auctionOpenBtn"
+        class="auction-main-button"
+        type="button"
+      >
+        🔨
+      </button>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- 창고 -->
+    <!-- ============================= -->
+
+    <section class="warehouse">
+
+      <div class="warehouse-header">
+
+        <div>
+          🧺
+        </div>
+
+        <div class="warehouse-title">
+          🐟 🐟 🐟
+        </div>
+
+        <div>
+          🔨
+        </div>
+
+      </div>
+
+
+      <div
+        id="warehouseGrid"
+        class="warehouse-grid"
+      >
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ============================= -->
+  <!-- 경매창 -->
+  <!-- ============================= -->
+
+  <div
+    id="auctionModal"
+    class="auction-modal hidden"
+  >
+
+    <div class="auction-room">
+
+
+      <button
+        id="auctionCloseBtn"
+        class="close-btn"
+        type="button"
+      >
+        ✕
+      </button>
+
+
+      <div class="auction-title">
+        🔨 AUCTION 🔨
+      </div>
+
+
+      <div class="auction-stage">
+
+        <div
+          id="auctionFish"
+          class="auction-fish"
+        >
+          🐟
+        </div>
+
+
+        <div
+          id="auctionStars"
+          class="auction-stars"
+        >
+          ⭐
+        </div>
+
+
+        <div class="auction-base-price">
+
+          <span>
+            🪙
+          </span>
+
+          <strong id="auctionBasePrice">
+            10
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- 참가자 -->
+
+      <div class="bidders">
+
+        <div class="bidder">
+
+          <div class="bidder-face">
+            👩
+          </div>
+
+          <div class="bid-value">
+            🪙
+            <strong id="bid1">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="bidder">
+
+          <div class="bidder-face">
+            👨
+          </div>
+
+          <div class="bid-value">
+            🪙
+            <strong id="bid2">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="bidder">
+
+          <div class="bidder-face">
+            👵
+          </div>
+
+          <div class="bid-value">
+            🪙
+            <strong id="bid3">
+              0
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 경매 결과 -->
+
+      <div
+        id="auctionResult"
+        class="auction-result"
+      >
+        🔨 👀
+      </div>
+
+
+      <button
+        id="sellBtn"
+        class="sell-btn"
+        type="button"
+      >
+        🔨 GO!
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================= -->
+  <!-- 획득 팝업 -->
+  <!-- ============================= -->
+
+  <div
+    id="rarePopup"
+    class="rare-popup hidden"
+  >
+
+    <div class="rare-card">
+
+      <div
+        id="rarePopupFish"
+        class="rare-popup-fish"
+      >
+        🐟
+      </div>
+
+      <div
+        id="rarePopupStars"
+        class="rare-popup-stars"
+      >
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <div class="rare-popup-text">
+        ✨ WOW! ✨
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
